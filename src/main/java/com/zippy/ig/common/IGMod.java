@@ -85,9 +85,9 @@ public class IGMod
 		
 		/// Ores |\\\
 		oreCopper = new oreCopper(Material.rock).setHardness(1.5F).setBlockName("oreCopper").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreCopper");
-		oreTin = new oreTin(Material.rock).setHardness(1.5F).setBlockName("ig:oreTin").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreTin");
-		oreSilver = new oreSilver(Material.rock).setHardness(1.5F).setBlockName("ig:oreSilver").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreSilver");
-		oreLead = new oreLead(Material.rock).setHardness(1.5F).setBlockName("ig:oreLead").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreLead");
+		oreTin = new oreTin(Material.rock).setHardness(1.5F).setBlockName("oreTin").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreTin");
+		oreSilver = new oreSilver(Material.rock).setHardness(1.5F).setBlockName("oreSilver").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreSilver");
+		oreLead = new oreLead(Material.rock).setHardness(1.5F).setBlockName("oreLead").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreLead");
 		oreColanite = new oreColanite(Material.rock).setBlockName("oreColanite").setBlockTextureName("oreColanite").setCreativeTab(IGMod.tabCreative);
 		
 		
@@ -150,6 +150,16 @@ public class IGMod
 		GameRegistry.addShapelessRecipe(new ItemStack(IGMod.ingotBronze, 3), new Object[]
 		{
 			IGMod.ingotCopper, IGMod.ingotCopper, IGMod.ingotTin
+		});
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.mossy_cobblestone, 2), new Object[]
+		{
+			Items.clay_ball, Items.wheat, Blocks.cobblestone
+		});
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.stonebrick, 2, 1), new Object[]
+		{
+			Items.clay_ball, Items.wheat, Blocks.stonebrick
 		});
 		
 		GameRegistry.addRecipe(new ItemStack(IGMod.leadFurnace), new Object[]
