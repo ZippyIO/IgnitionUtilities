@@ -1,19 +1,24 @@
 package com.zippy.ig.common;
 
+import com.zippy.ig.common.block.oreColanite;
 import com.zippy.ig.common.block.oreCopper;
 import com.zippy.ig.common.block.oreLead;
 import com.zippy.ig.common.block.oreSilver;
 import com.zippy.ig.common.block.oreTin;
 import com.zippy.ig.common.eventmanager.EventManager;
+import com.zippy.ig.common.gui.GuiHandler;
 import com.zippy.ig.common.item.ingot.ingotBronze;
 import com.zippy.ig.common.item.ingot.ingotCopper;
 import com.zippy.ig.common.item.ingot.ingotLead;
 import com.zippy.ig.common.item.ingot.ingotSilver;
 import com.zippy.ig.common.item.ingot.ingotTin;
+import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,11 +27,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = IGMod.modid, name = "IgnitionUtilities Mod", version = "0.1-MC1.7.2")
@@ -49,8 +56,10 @@ public class IGMod
 	public static Block oreTin;
 	public static Block oreSilver;
 	public static Block oreLead;
+	public static Block oreColanite;
 	
-	
+	public static Block leadFurnace;
+	public static Block leadFurnaceActive;
 	///| Items |\\\
 	
 	/// Ingots \\\
@@ -59,13 +68,14 @@ public class IGMod
 	public static Item ingotSilver;
 	public static Item ingotLead;
 	public static Item ingotBronze;
+	public static Item Colanite;
 	
 	/// Mod Handlers/EventManagers \\\
 	EventManager eventmanager = new EventManager();
 	public static IGCreativeTab tabCreative = new IGCreativeTab("IgnitionUtil");
 
 	
-	@Mod.Instance("IgnitionUtilities")
+	@Instance("ignitionutilities")
 	public static IGMod instance;
 	
 	@Mod.EventHandler
@@ -78,7 +88,11 @@ public class IGMod
 		oreTin = new oreTin(Material.rock).setHardness(1.5F).setBlockName("ig:oreTin").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreTin");
 		oreSilver = new oreSilver(Material.rock).setHardness(1.5F).setBlockName("ig:oreSilver").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreSilver");
 		oreLead = new oreLead(Material.rock).setHardness(1.5F).setBlockName("ig:oreLead").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreLead");
+		oreColanite = new oreColanite(Material.rock).setBlockName("oreColanite").setBlockTextureName("oreColanite").setCreativeTab(IGMod.tabCreative);
 		
+		
+		leadFurnace = new leadFurnace(false).setBlockName("leadFurnace").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
+		leadFurnaceActive = new leadFurnace(true).setBlockName("leadFurnaceActive").setHardness(1.5F);
 		///| Items |\\\
 		
 		/// Ingots \\\
@@ -87,6 +101,7 @@ public class IGMod
 		ingotSilver = new ingotSilver().setUnlocalizedName("ingotSilver").setTextureName("ingotSilver").setCreativeTab(IGMod.tabCreative);
 		ingotLead = new ingotLead().setUnlocalizedName("ingotLead").setTextureName("ingotLead").setCreativeTab(IGMod.tabCreative);
 		ingotBronze = new ingotBronze().setUnlocalizedName("ingotBronze").setTextureName("ingotBronze").setCreativeTab(IGMod.tabCreative);
+		Colanite = new Colanite().setUnlocalizedName("Colanite").setTextureName("Colanite").setCreativeTab(IGMod.tabCreative);
 		
 		///| Register Blocks |\\\
 		
@@ -95,6 +110,10 @@ public class IGMod
 		registerBlock(oreTin);
 		registerBlock(oreSilver);
 		registerBlock(oreLead);
+		registerBlock(oreColanite);
+		
+		registerBlock(leadFurnace);
+		registerBlock(leadFurnaceActive);
 		
 		///| Register Items |\\\
 		
@@ -104,9 +123,13 @@ public class IGMod
 		registerItem(ingotSilver);
 		registerItem(ingotLead);
 		registerItem(ingotBronze);
+		registerItem(Colanite);
 		
 		///| Register Handlers/EventManagers |\\\
 		GameRegistry.registerWorldGenerator(eventmanager, 0);
+		GuiHandler GuiHandler = new GuiHandler();
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		GameRegistry.registerTileEntity(TileEntityLeadFurnace.class, "TileEntityLeadFurnace");
 		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		
@@ -129,12 +152,18 @@ public class IGMod
 			IGMod.ingotCopper, IGMod.ingotCopper, IGMod.ingotTin
 		});
 		
+		GameRegistry.addRecipe(new ItemStack(IGMod.leadFurnace), new Object[]
+		{
+			"LIL", "LFL", "LIL", 'L', IGMod.ingotLead, 'I', Items.iron_ingot, 'F', Blocks.furnace
+		});
+		
 		
 		/// Smelting \\\
 		GameRegistry.addSmelting(IGMod.oreCopper, new ItemStack(IGMod.ingotCopper), 0.15F);
 		GameRegistry.addSmelting(IGMod.oreTin, new ItemStack(IGMod.ingotTin), 0.15F);
 		GameRegistry.addSmelting(IGMod.oreSilver, new ItemStack(IGMod.ingotSilver), 0.15F);
 		GameRegistry.addSmelting(IGMod.oreLead, new ItemStack(IGMod.ingotLead), 0.15F);
+		GameRegistry.addSmelting(IGMod.oreColanite, new ItemStack(IGMod.Colanite), 0.15F);
 		
 		/// OreDictionary \\\
 		OreDictionary.registerOre("oreCopper", IGMod.oreCopper);
