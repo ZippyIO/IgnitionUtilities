@@ -1,0 +1,13 @@
+
+tile.oreCopper.name=Copper Ore
+tile.oreTin.name= Tin Ore
+tile.oreSilver.name= Silver Ore
+tile.oreLead.name= Lead Ore
+tile.oreColanite.name= Colanite ore
+tile.leadFurnace.name= Lead Furnace
+item.ingotCopper.name= Copper Ingot
+item.ingotTin.name= Tin Ingot
+item.ingotSilver.name= Silver Ingot
+item.ingotLead.name= Lead Ingot
+item.ingotBronze.name= Bronze Ingot	
+item.Colanite.name= Colanite
