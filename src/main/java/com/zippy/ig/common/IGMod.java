@@ -5,6 +5,7 @@ import com.zippy.ig.common.block.oreLead;
 import com.zippy.ig.common.block.oreSilver;
 import com.zippy.ig.common.block.oreTin;
 import com.zippy.ig.common.eventmanager.EventManager;
+import com.zippy.ig.common.item.ingot.ingotBronze;
 import com.zippy.ig.common.item.ingot.ingotCopper;
 import com.zippy.ig.common.item.ingot.ingotLead;
 import com.zippy.ig.common.item.ingot.ingotSilver;
@@ -17,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -30,6 +32,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = IGMod.modid, name = "IgnitionUtilities Mod", version = "0.1-MC1.7.2")
 public class IGMod
 {
+	/// Icons/Textures are temporary \\\
 	
 	
 	/// Class files for each part of this made will be done in a latter commit, 
@@ -55,6 +58,7 @@ public class IGMod
 	public static Item ingotTin;
 	public static Item ingotSilver;
 	public static Item ingotLead;
+	public static Item ingotBronze;
 	
 	/// Mod Handlers/EventManagers \\\
 	EventManager eventmanager = new EventManager();
@@ -82,7 +86,7 @@ public class IGMod
 		ingotTin = new ingotTin().setUnlocalizedName("ingotTin").setTextureName("ingotTin").setCreativeTab(IGMod.tabCreative);
 		ingotSilver = new ingotSilver().setUnlocalizedName("ingotSilver").setTextureName("ingotSilver").setCreativeTab(IGMod.tabCreative);
 		ingotLead = new ingotLead().setUnlocalizedName("ingotLead").setTextureName("ingotLead").setCreativeTab(IGMod.tabCreative);
-		
+		ingotBronze = new ingotBronze().setUnlocalizedName("ingotBronze").setTextureName("ingotBronze").setCreativeTab(IGMod.tabCreative);
 		
 		///| Register Blocks |\\\
 		
@@ -99,6 +103,7 @@ public class IGMod
 		registerItem(ingotTin);
 		registerItem(ingotSilver);
 		registerItem(ingotLead);
+		registerItem(ingotBronze);
 		
 		///| Register Handlers/EventManagers |\\\
 		GameRegistry.registerWorldGenerator(eventmanager, 0);
@@ -115,6 +120,33 @@ public class IGMod
 		oreSilver.setHarvestLevel("pickaxe", 2);
 		oreLead.setHarvestLevel("pickaxe", 2);
 		
+		
+		///| Recipes |\\\\
+		
+		/// Crafting \\\
+		GameRegistry.addShapelessRecipe(new ItemStack(IGMod.ingotBronze, 3), new Object[]
+		{
+			IGMod.ingotCopper, IGMod.ingotCopper, IGMod.ingotTin
+		});
+		
+		
+		/// Smelting \\\
+		GameRegistry.addSmelting(IGMod.oreCopper, new ItemStack(IGMod.ingotCopper), 0.15F);
+		GameRegistry.addSmelting(IGMod.oreTin, new ItemStack(IGMod.ingotTin), 0.15F);
+		GameRegistry.addSmelting(IGMod.oreSilver, new ItemStack(IGMod.ingotSilver), 0.15F);
+		GameRegistry.addSmelting(IGMod.oreLead, new ItemStack(IGMod.ingotLead), 0.15F);
+		
+		/// OreDictionary \\\
+		OreDictionary.registerOre("oreCopper", IGMod.oreCopper);
+		OreDictionary.registerOre("oreTin", IGMod.oreTin);
+		OreDictionary.registerOre("oreSilver", IGMod.oreSilver);
+		OreDictionary.registerOre("oreLead", IGMod.oreLead);
+		
+		OreDictionary.registerOre("ingotCopper", IGMod.ingotCopper);
+		OreDictionary.registerOre("ingotTin", IGMod.ingotTin);
+		OreDictionary.registerOre("ingotSilver", IGMod.ingotSilver);
+		OreDictionary.registerOre("ingotLead", IGMod.ingotLead);
+		OreDictionary.registerOre("ingotBronze", IGMod.ingotBronze);
 	}
 	
 	@Mod.EventHandler
