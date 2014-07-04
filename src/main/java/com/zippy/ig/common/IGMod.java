@@ -162,7 +162,10 @@ public class IGMod
 		oreTin.setHarvestLevel("pickaxe", 1);
 		oreSilver.setHarvestLevel("pickaxe", 2);
 		oreLead.setHarvestLevel("pickaxe", 2);
-		
+		oreIronite.setHarvestLevel("pickaxe", 1);
+		oreGoldanite.setHarvestLevel("pickaxe", 2);
+		oreLapanite.setHarvestLevel("pickaxe", 2);
+		oreRedanite.setHarvestLevel("pickaxe", 2);
 		
 		///| Recipes |\\\\
 		
@@ -180,6 +183,10 @@ public class IGMod
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.stonebrick, 2, 1), new Object[]
 		{
 			Items.clay_ball, Items.wheat, Blocks.stonebrick
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 1, 4), new Object[]
+		{
+			IGMod.Lapanite
 		});
 		
 		GameRegistry.addRecipe(new ItemStack(IGMod.leadFurnace), new Object[]
@@ -200,12 +207,17 @@ public class IGMod
 		OreDictionary.registerOre("oreTin", IGMod.oreTin);
 		OreDictionary.registerOre("oreSilver", IGMod.oreSilver);
 		OreDictionary.registerOre("oreLead", IGMod.oreLead);
+		OreDictionary.registerOre("oreIron", IGMod.oreIronite);
+		OreDictionary.registerOre("oreGold", IGMod.oreGoldanite);
+		OreDictionary.registerOre("oreRedstone", IGMod.oreRedanite);
+		OreDictionary.registerOre("oreLapis", IGMod.oreLapanite);
 		
 		OreDictionary.registerOre("ingotCopper", IGMod.ingotCopper);
 		OreDictionary.registerOre("ingotTin", IGMod.ingotTin);
 		OreDictionary.registerOre("ingotSilver", IGMod.ingotSilver);
 		OreDictionary.registerOre("ingotLead", IGMod.ingotLead);
 		OreDictionary.registerOre("ingotBronze", IGMod.ingotBronze);
+		OreDictionary.registerOre("dyeBlue", IGMod.Lapanite);
 	}
 	
 	@Mod.EventHandler
