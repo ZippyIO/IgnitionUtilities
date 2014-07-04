@@ -38,6 +38,10 @@ public class EventManager implements IWorldGenerator
         this.addOreSpawn(IGMod.oreSilver, world, random, x, z, 16, 16, 12 + random.nextInt(3), 6, 1, 32);
         this.addOreSpawn(IGMod.oreLead, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 50);
         this.addOreSpawn(IGMod.oreColanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 105);
+        this.addOreSpawn(IGMod.oreGoldanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 30);
+        this.addOreSpawn(IGMod.oreIronite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 100);
+        this.addOreSpawn(IGMod.oreLapanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 7, 1, 30);
+        this.addOreSpawn(IGMod.oreRedanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 30);
     }
  
     private void generateNether(World world, Random random, int x, int z)

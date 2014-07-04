@@ -2,11 +2,16 @@ package com.zippy.ig.common;
 
 import com.zippy.ig.common.block.oreColanite;
 import com.zippy.ig.common.block.oreCopper;
+import com.zippy.ig.common.block.oreGoldanite;
+import com.zippy.ig.common.block.oreIronite;
+import com.zippy.ig.common.block.oreLapanite;
 import com.zippy.ig.common.block.oreLead;
+import com.zippy.ig.common.block.oreRedanite;
 import com.zippy.ig.common.block.oreSilver;
 import com.zippy.ig.common.block.oreTin;
 import com.zippy.ig.common.eventmanager.EventManager;
 import com.zippy.ig.common.gui.GuiHandler;
+import com.zippy.ig.common.item.ingot.Lapanite;
 import com.zippy.ig.common.item.ingot.ingotBronze;
 import com.zippy.ig.common.item.ingot.ingotCopper;
 import com.zippy.ig.common.item.ingot.ingotLead;
@@ -57,6 +62,10 @@ public class IGMod
 	public static Block oreSilver;
 	public static Block oreLead;
 	public static Block oreColanite;
+	public static Block oreGoldanite;
+	public static Block oreIronite;
+	public static Block oreLapanite;
+	public static Block oreRedanite;
 	
 	public static Block leadFurnace;
 	public static Block leadFurnaceActive;
@@ -69,6 +78,7 @@ public class IGMod
 	public static Item ingotLead;
 	public static Item ingotBronze;
 	public static Item Colanite;
+	public static Item Lapanite;
 	
 	/// Mod Handlers/EventManagers \\\
 	EventManager eventmanager = new EventManager();
@@ -89,6 +99,10 @@ public class IGMod
 		oreSilver = new oreSilver(Material.rock).setHardness(1.5F).setBlockName("oreSilver").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreSilver");
 		oreLead = new oreLead(Material.rock).setHardness(1.5F).setBlockName("oreLead").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreLead");
 		oreColanite = new oreColanite(Material.rock).setBlockName("oreColanite").setBlockTextureName("oreColanite").setCreativeTab(IGMod.tabCreative);
+		oreGoldanite = new oreGoldanite(Material.rock).setBlockName("oreGoldanite").setBlockTextureName("oreGoldanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
+		oreIronite = new oreIronite(Material.rock).setBlockName("oreIronite").setBlockTextureName("oreIronite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
+		oreLapanite = new oreLapanite(Material.rock).setBlockName("oreLapanite").setBlockTextureName("oreLapanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
+		oreRedanite = new oreRedanite(Material.rock).setBlockName("oreRedanite").setBlockTextureName("oreRedanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
 		
 		
 		leadFurnace = new leadFurnace(false).setBlockName("leadFurnace").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
@@ -102,6 +116,7 @@ public class IGMod
 		ingotLead = new ingotLead().setUnlocalizedName("ingotLead").setTextureName("ingotLead").setCreativeTab(IGMod.tabCreative);
 		ingotBronze = new ingotBronze().setUnlocalizedName("ingotBronze").setTextureName("ingotBronze").setCreativeTab(IGMod.tabCreative);
 		Colanite = new Colanite().setUnlocalizedName("Colanite").setTextureName("Colanite").setCreativeTab(IGMod.tabCreative);
+		Lapanite = new Lapanite().setUnlocalizedName("Lapanite").setTextureName("Lapanite").setCreativeTab(IGMod.tabCreative);
 		
 		///| Register Blocks |\\\
 		
@@ -111,6 +126,10 @@ public class IGMod
 		registerBlock(oreSilver);
 		registerBlock(oreLead);
 		registerBlock(oreColanite);
+		registerBlock(oreGoldanite);
+		registerBlock(oreIronite);
+		registerBlock(oreLapanite);
+		registerBlock(oreRedanite);
 		
 		registerBlock(leadFurnace);
 		registerBlock(leadFurnaceActive);
@@ -124,6 +143,7 @@ public class IGMod
 		registerItem(ingotLead);
 		registerItem(ingotBronze);
 		registerItem(Colanite);
+		registerItem(Lapanite);
 		
 		///| Register Handlers/EventManagers |\\\
 		GameRegistry.registerWorldGenerator(eventmanager, 0);
