@@ -38,10 +38,6 @@ if(ID == 2){
 TileEntityMachineRoaster tileEntityRoaster = (TileEntityMachineRoaster) world.getTileEntity(x, y, z);
 return new ContainerMachineRoaster(player.inventory, tileEntityRoaster);
 }
-if(ID == 5){
-TilePulverizier pulverizier = (TilePulverizier) world.getTileEntity(x, y, z);
-return new ContainerPulverizier(player.inventory, pulverizier);
-}
 if(ID == 6){
 	TileSteamGenerator steamgenerator = (TileSteamGenerator) world.getTileEntity(x, y, z);
 return new ContainerGenerator(player.inventory, steamgenerator);
@@ -62,10 +58,6 @@ return new guiMachinePurifier(player.inventory, tileEntityCPurifer);
 if(ID == 2){
 	TileEntityMachineRoaster tileEntityCRoaster = (TileEntityMachineRoaster) world.getTileEntity(x, y, z);
 return new GuiMachineRoaster(player.inventory, tileEntityCRoaster);
-}
-if(ID == 5){
-	TilePulverizier CPulverizier = (TilePulverizier) world.getTileEntity(x, y, z);
-return new GuiPulverizier(player.inventory, CPulverizier);
 }
 if(ID == 6){
 	TileSteamGenerator SGenerator = (TileSteamGenerator) world.getTileEntity(x, y, z);

@@ -81,7 +81,7 @@ public class GuiPulverizier extends GuiContainer {
     	int energyLevel;
     	int batteryLevel;
 		
-		final ResourceLocation texture = new ResourceLocation("additionaltech", "textures/gui/efurnace.png");
+		final ResourceLocation texture = new ResourceLocation("ignitionutilities", "textures/gui/efurnace.png");
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
 		int guiWidth = (width - xSize) / 2;

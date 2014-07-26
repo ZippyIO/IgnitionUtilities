@@ -36,7 +36,7 @@ public class blockPulverizer extends BlockContainer {
 		super(new Material(MapColor.stoneColor));
 		setStepSound(Block.soundTypeMetal);
 		setHardness(5.0F);
-		setBlockTextureName("additionaltech:EFurnaceFace");
+		setBlockTextureName("ignitionutilities:EFurnaceFace");
 		setCreativeTab(IGRegistry.tabCreative);
 		setHarvestLevel("pickaxe", 1);
 	}
@@ -44,9 +44,9 @@ public class blockPulverizer extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		blockIcon = par1IconRegister.registerIcon("additionaltech:Casing");
-		blockIconFaceActive = par1IconRegister.registerIcon("additionaltech:EFurnaceFaceActive");
-		blockIconFace = par1IconRegister.registerIcon("additionaltech:EFurnaceFace");
+		blockIcon = par1IconRegister.registerIcon("ignitionutilities:Casing");
+		blockIconFaceActive = par1IconRegister.registerIcon("ignitionutilities:EFurnaceFaceActive");
+		blockIconFace = par1IconRegister.registerIcon("ignitionutilities:EFurnaceFace");
 	}
 	
 	@Override

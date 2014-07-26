@@ -118,7 +118,7 @@ public class IGBlocks {
 		machinePurifier = new machinePurifier(false).setBlockName("machinePurifier").setHardness(1.5F).setCreativeTab(IGRegistry.tabCreative);
 		machinePurifierActive = new machinePurifier(true).setBlockName("machinePurifierActive").setHardness(1.5F);
 		
-		EPulverizer = new blockPulverizer().setBlockName("pulverizier");
+		//EPulverizer = new blockPulverizer().setBlockName("pulverizier");
 
 		SteamGenerator = new SteamGenerator(Material.iron).setBlockName("SteamGenerator").setCreativeTab(IGRegistry.tabCreative);
 		
@@ -140,7 +140,6 @@ public class IGBlocks {
 		registerBlock(leadFurnaceActive);
 		registerBlock(machinePurifier);
 		registerBlock(machinePurifierActive);
-		registerBlock(EPulverizer);
 		registerBlock(SteamGenerator);
 		
 		oreCopper.setHarvestLevel("pickaxe", 1);

@@ -2,40 +2,22 @@ package com.zippy.ig.common;
 
 import java.util.Random;
 
+import net.minecraft.entity.EntityList;
+import net.minecraft.item.Item;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.config.Configuration;
+
 import com.zippy.ig.common.biome.BiomeGenSacredSpringz;
 import com.zippy.ig.common.eventmanager.EventManager;
 import com.zippy.ig.common.gui.GuiHandler;
+import com.zippy.ig.common.misc.TiCReference;
 import com.zippy.ig.common.registry.IGBlocks;
 import com.zippy.ig.common.registry.IGItems;
 import com.zippy.ig.common.registry.IGRecipes;
 import com.zippy.ig.common.registry.IGRegistry;
 import com.zippy.ig.common.registry.IGTiC;
 import com.zippy.ig.common.tile.PulverizierTEMessage;
-import com.zippy.ig.common.tile.TilePulverizier;
-import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
-import com.zippy.ig.common.tileentity.TileEntityMachinePurifier;
-import com.zippy.ig.common.tileentity.TileEntityMachineRoaster;
-import com.zippy.ig.common.world.WorldTypeCustom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityList;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenJungle;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.terraingen.WorldTypeEvent;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -116,7 +98,7 @@ public class IGMod
 	@Mod.EventHandler
 	public void postload(FMLPostInitializationEvent event) {
 		
-		IGTiC.preInit();
+		if(TiCReference.TiCAvailable) new IGTiC().preInit();
 		
 	}
 	

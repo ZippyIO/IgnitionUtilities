@@ -13,10 +13,15 @@ import com.zippy.ig.common.IGMod;
 import com.zippy.ig.common.machine.BlockConductor;
 import com.zippy.ig.common.registry.IGRegistry;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 
 public class SteamGenerator extends BlockConductor {
 
-	public IIcon[] icons;
+	protected IIcon blockIcon;
+	protected IIcon blockIconFace;
+	protected IIcon blockIconFaceActive;
 	
 	public SteamGenerator(Material m) {
 		super(m);
@@ -31,7 +36,7 @@ public class SteamGenerator extends BlockConductor {
 		return new TileSteamGenerator();
 	}
 	
-	public void registerBlockIcons(IIconRegister IR){
+	/*public void registerBlockIcons(IIconRegister IR){
 		icons = new IIcon[3];
 		icons[0] = IR.registerIcon("ignitionutilities:chasis");
 		icons[1] = IR.registerIcon("ignitionutilities:machines/generator_off");
@@ -42,6 +47,24 @@ public class SteamGenerator extends BlockConductor {
 		if(side == 0 || side == 1)return icons[0];
 		if(meta == 0)return icons[1];
 		return icons[2];
+	}*/
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		blockIcon = par1IconRegister.registerIcon("ignitionutilities:GeneratorCasing");
+		blockIconFaceActive = par1IconRegister.registerIcon("ignitionutilities:GeneratorDisable");
+		blockIconFace = par1IconRegister.registerIcon("ignitionutilities:GeneratorActive");
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta){
+
+		if (meta > 5) {
+			return meta == 0 && side == 6 ? blockIconFaceActive : (side + 6 == meta ? blockIconFaceActive : blockIcon);
+		} else 
+			return meta == 0 && side == 3 ? blockIconFace : (side == meta ? blockIconFace : blockIcon);
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){
