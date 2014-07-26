@@ -1,7 +1,6 @@
 package com.zippy.ig.common.item;
 
 import com.zippy.ig.common.machine.ISpeeded;
-import common.cout970.UltraTech.items.UT_Item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

@@ -14,7 +14,6 @@ import com.zippy.ig.common.tile.TilePulverizier;
 import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
 import com.zippy.ig.common.tileentity.TileEntityMachinePurifier;
 import com.zippy.ig.common.tileentity.TileEntityMachineRoaster;
-import common.cout970.UltraTech.containers.CutterContainer;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
