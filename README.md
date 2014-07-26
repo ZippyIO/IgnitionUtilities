@@ -16,3 +16,8 @@ Links
 [Source Code](https://github.com/ZippyBling/IgnitionUtilities)
 [Wiki](http://ignitionutilities.wikia.com/wiki/IgnitionUtilities_Wiki)
 [Download](https://github.com/ZippyBling/IgnitionUtilities/releases)
+>
+Licence
+---------------------
+IgnitionUtilties & IgnitionLib is licenced under Apache 2.0 
+[Link](http://choosealicense.com/licenses/apache-2.0/)
