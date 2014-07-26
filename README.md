@@ -14,7 +14,9 @@ If you would like to know more about the mod you can visit the wiki and or help 
 Links
 ---------------------
 [Source Code](https://github.com/ZippyBling/IgnitionUtilities)
+
 [Wiki](http://ignitionutilities.wikia.com/wiki/IgnitionUtilities_Wiki)
+
 [Download](https://github.com/ZippyBling/IgnitionUtilities/releases)
 
 Licence
