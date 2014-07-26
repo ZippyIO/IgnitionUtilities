@@ -2,10 +2,6 @@ package com.zippy.ig.common;
 
 import java.util.Random;
 
-import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
@@ -14,17 +10,19 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.zippy.ig.common.registry.IGBlocks;
+import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class leadFurnace extends BlockContainer
 {
@@ -38,7 +36,7 @@ public class leadFurnace extends BlockContainer
 	private final boolean isBurning2;
 	private final Random random = new Random();
 
-	protected leadFurnace(boolean isActive) {
+	public leadFurnace(boolean isActive) {
 		super(Material.rock);
 		isBurning2 = isActive;
 	}
@@ -66,11 +64,11 @@ public class leadFurnace extends BlockContainer
 	}
 
 	public Item getItemDropped(int par1, Random random, int par3) {
-		return Item.getItemFromBlock(IGMod.leadFurnace);
+		return Item.getItemFromBlock(IGBlocks.leadFurnace);
 	}
 
 	public Item getItem(World world, int par2, int par3, int par4) {
-		return Item.getItemFromBlock(IGMod.leadFurnace);
+		return Item.getItemFromBlock(IGBlocks.leadFurnace);
 	}
 	
 	/**
@@ -198,9 +196,9 @@ public class leadFurnace extends BlockContainer
 		isBurning = true;
 
 		if (burning) {
-			world.setBlock(x, y, z, IGMod.leadFurnaceActive);
+			world.setBlock(x, y, z, IGBlocks.leadFurnaceActive);
 		} else {
-			world.setBlock(x, y, z, IGMod.leadFurnace);
+			world.setBlock(x, y, z, IGBlocks.leadFurnace);
 		}
 
 		isBurning = false;

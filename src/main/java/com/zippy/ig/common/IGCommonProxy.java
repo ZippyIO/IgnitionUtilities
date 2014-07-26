@@ -12,5 +12,7 @@ public class IGCommonProxy {
 	public void registerTileEntities(){
 
 	}
+	
+	public void registerRenderers() {}
 
 }

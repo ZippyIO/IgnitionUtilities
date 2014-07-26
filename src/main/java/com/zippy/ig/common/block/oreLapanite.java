@@ -2,13 +2,11 @@ package com.zippy.ig.common.block;
 
 import java.util.Random;
 
-import com.zippy.ig.common.IGMod;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+
+import com.zippy.ig.common.registry.IGItems;
 
 public class oreLapanite extends Block {
 
@@ -18,7 +16,7 @@ public class oreLapanite extends Block {
 	
     public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return IGMod.Lapanite;
+        return IGItems.Lapanite;
     }
 
 

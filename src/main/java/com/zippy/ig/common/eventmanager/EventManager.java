@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-import com.zippy.ig.common.IGMod;
+import com.zippy.ig.common.registry.IGBlocks;
 
 import cpw.mods.fml.common.IWorldGenerator;
  
@@ -33,15 +33,15 @@ public class EventManager implements IWorldGenerator
  
     private void generateSurface(World world, Random random, int x, int z)
     {
-        this.addOreSpawn(IGMod.oreCopper, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 60);
-        this.addOreSpawn(IGMod.oreTin, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 50);
-        this.addOreSpawn(IGMod.oreSilver, world, random, x, z, 16, 16, 12 + random.nextInt(3), 6, 1, 32);
-        this.addOreSpawn(IGMod.oreLead, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 50);
-        this.addOreSpawn(IGMod.oreColanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 105);
-        this.addOreSpawn(IGMod.oreGoldanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 30);
-        this.addOreSpawn(IGMod.oreIronite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 100);
-        this.addOreSpawn(IGMod.oreLapanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 7, 1, 30);
-        this.addOreSpawn(IGMod.oreRedanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 30);
+        this.addOreSpawn(IGBlocks.oreCopper, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 60);
+        this.addOreSpawn(IGBlocks.oreTin, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 50);
+        this.addOreSpawn(IGBlocks.oreSilver, world, random, x, z, 16, 16, 12 + random.nextInt(3), 6, 1, 32);
+        this.addOreSpawn(IGBlocks.oreLead, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 50);
+        this.addOreSpawn(IGBlocks.oreColanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 105);
+        this.addOreSpawn(IGBlocks.oreGoldanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 30);
+        this.addOreSpawn(IGBlocks.oreIronite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 10, 1, 100);
+        this.addOreSpawn(IGBlocks.oreLapanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 7, 1, 30);
+        this.addOreSpawn(IGBlocks.oreRedanite, world, random, x, z, 16, 16, 12 + random.nextInt(3), 8, 1, 30);
     }
  
     private void generateNether(World world, Random random, int x, int z)

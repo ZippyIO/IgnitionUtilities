@@ -1,33 +1,39 @@
 package com.zippy.ig.common;
 
-import com.zippy.ig.common.block.oreColanite;
-import com.zippy.ig.common.block.oreCopper;
-import com.zippy.ig.common.block.oreGoldanite;
-import com.zippy.ig.common.block.oreIronite;
-import com.zippy.ig.common.block.oreLapanite;
-import com.zippy.ig.common.block.oreLead;
-import com.zippy.ig.common.block.oreRedanite;
-import com.zippy.ig.common.block.oreSilver;
-import com.zippy.ig.common.block.oreTin;
+import java.util.Random;
+
+import com.zippy.ig.common.biome.BiomeGenSacredSpringz;
 import com.zippy.ig.common.eventmanager.EventManager;
 import com.zippy.ig.common.gui.GuiHandler;
-import com.zippy.ig.common.item.ingot.Lapanite;
-import com.zippy.ig.common.item.ingot.ingotBronze;
-import com.zippy.ig.common.item.ingot.ingotCopper;
-import com.zippy.ig.common.item.ingot.ingotLead;
-import com.zippy.ig.common.item.ingot.ingotSilver;
-import com.zippy.ig.common.item.ingot.ingotTin;
+import com.zippy.ig.common.registry.IGBlocks;
+import com.zippy.ig.common.registry.IGItems;
+import com.zippy.ig.common.registry.IGRecipes;
+import com.zippy.ig.common.registry.IGRegistry;
+import com.zippy.ig.common.registry.IGTiC;
+import com.zippy.ig.common.tile.PulverizierTEMessage;
+import com.zippy.ig.common.tile.TilePulverizier;
 import com.zippy.ig.common.tileentity.TileEntityLeadFurnace;
+import com.zippy.ig.common.tileentity.TileEntityMachinePurifier;
+import com.zippy.ig.common.tileentity.TileEntityMachineRoaster;
+import com.zippy.ig.common.world.WorldTypeCustom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenJungle;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -39,9 +45,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = IGMod.modid, name = "IgnitionUtilities Mod", version = "0.1-MC1.7.2")
+@Mod(modid = IGMod.modid, name = "IgnitionUtilities Mod", version = "0.3-MC1.7.2", dependencies = "required-after:IgnitionLib")
 public class IGMod
 {
 	/// Icons/Textures are temporary \\\
@@ -57,171 +66,59 @@ public class IGMod
 	///| Blocks |\\\
 	
 	// Ores ///
-	public static Block oreCopper;
-	public static Block oreTin;
-	public static Block oreSilver;
-	public static Block oreLead;
-	public static Block oreColanite;
-	public static Block oreGoldanite;
-	public static Block oreIronite;
-	public static Block oreLapanite;
-	public static Block oreRedanite;
-	
-	public static Block leadFurnace;
-	public static Block leadFurnaceActive;
-	///| Items |\\\
-	
-	/// Ingots \\\
-	public static Item ingotCopper;
-	public static Item ingotTin;
-	public static Item ingotSilver;
-	public static Item ingotLead;
-	public static Item ingotBronze;
-	public static Item Colanite;
-	public static Item Lapanite;
-	
-	/// Mod Handlers/EventManagers \\\
-	EventManager eventmanager = new EventManager();
-	public static IGCreativeTab tabCreative = new IGCreativeTab("IgnitionUtil");
 
 	
+	///| Items |\\\
+	
+	
+	
+	/// Ingots \\\
+
+	
+
+	
+	public static final BiomeGenBase SacredSpringz = (new BiomeGenSacredSpringz(40)).setColor(39259).setBiomeName("SacredSpringz").func_76733_a(5470985).setTemperatureRainfall(0.95F, 0.9F);
+	
+	public static SimpleNetworkWrapper snw; 
+	
+	/// Mod Handlers/EventManagers \\\
+	
+
+	EventManager eventmanager = new EventManager();
 	@Instance("ignitionutilities")
 	public static IGMod instance;
 	
 	@Mod.EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		///| Blocks |\\\
-		
-		/// Ores |\\\
-		oreCopper = new oreCopper(Material.rock).setHardness(1.5F).setBlockName("oreCopper").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreCopper");
-		oreTin = new oreTin(Material.rock).setHardness(1.5F).setBlockName("oreTin").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreTin");
-		oreSilver = new oreSilver(Material.rock).setHardness(1.5F).setBlockName("oreSilver").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreSilver");
-		oreLead = new oreLead(Material.rock).setHardness(1.5F).setBlockName("oreLead").setCreativeTab(IGMod.tabCreative).setBlockTextureName("oreLead");
-		oreColanite = new oreColanite(Material.rock).setBlockName("oreColanite").setBlockTextureName("oreColanite").setCreativeTab(IGMod.tabCreative);
-		oreGoldanite = new oreGoldanite(Material.rock).setBlockName("oreGoldanite").setBlockTextureName("oreGoldanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
-		oreIronite = new oreIronite(Material.rock).setBlockName("oreIronite").setBlockTextureName("oreIronite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
-		oreLapanite = new oreLapanite(Material.rock).setBlockName("oreLapanite").setBlockTextureName("oreLapanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
-		oreRedanite = new oreRedanite(Material.rock).setBlockName("oreRedanite").setBlockTextureName("oreRedanite").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
-		
-		
-		leadFurnace = new leadFurnace(false).setBlockName("leadFurnace").setHardness(1.5F).setCreativeTab(IGMod.tabCreative);
-		leadFurnaceActive = new leadFurnace(true).setBlockName("leadFurnaceActive").setHardness(1.5F);
-		///| Items |\\\
-		
-		/// Ingots \\\
-		ingotCopper = new ingotCopper().setUnlocalizedName("ingotCopper").setTextureName("ingotCopper").setCreativeTab(IGMod.tabCreative);
-		ingotTin = new ingotTin().setUnlocalizedName("ingotTin").setTextureName("ingotTin").setCreativeTab(IGMod.tabCreative);
-		ingotSilver = new ingotSilver().setUnlocalizedName("ingotSilver").setTextureName("ingotSilver").setCreativeTab(IGMod.tabCreative);
-		ingotLead = new ingotLead().setUnlocalizedName("ingotLead").setTextureName("ingotLead").setCreativeTab(IGMod.tabCreative);
-		ingotBronze = new ingotBronze().setUnlocalizedName("ingotBronze").setTextureName("ingotBronze").setCreativeTab(IGMod.tabCreative);
-		Colanite = new Colanite().setUnlocalizedName("Colanite").setTextureName("Colanite").setCreativeTab(IGMod.tabCreative);
-		Lapanite = new Lapanite().setUnlocalizedName("Lapanite").setTextureName("Lapanite").setCreativeTab(IGMod.tabCreative);
-		
-		///| Register Blocks |\\\
-		
-		/// Register Ores ///
-		registerBlock(oreCopper);
-		registerBlock(oreTin);
-		registerBlock(oreSilver);
-		registerBlock(oreLead);
-		registerBlock(oreColanite);
-		registerBlock(oreGoldanite);
-		registerBlock(oreIronite);
-		registerBlock(oreLapanite);
-		registerBlock(oreRedanite);
-		
-		registerBlock(leadFurnace);
-		registerBlock(leadFurnaceActive);
-		
-		///| Register Items |\\\
-		
-		/// Ingots \\\
-		registerItem(ingotCopper);
-		registerItem(ingotTin);
-		registerItem(ingotSilver);
-		registerItem(ingotLead);
-		registerItem(ingotBronze);
-		registerItem(Colanite);
-		registerItem(Lapanite);
-		
-		///| Register Handlers/EventManagers |\\\
-		GameRegistry.registerWorldGenerator(eventmanager, 0);
-		GuiHandler GuiHandler = new GuiHandler();
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		GameRegistry.registerTileEntity(TileEntityLeadFurnace.class, "TileEntityLeadFurnace");
-		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		
+		IGItems.preInit();
+		IGRecipes.preInit();
+		IGBlocks.preInit();
+		IGRegistry.preInit();
+		
+
+		
+		snw = NetworkRegistry.INSTANCE.newSimpleChannel("ignitionutilities"); 
+		snw.registerMessage(PulverizierTEMessage.class, PulverizierTEMessage.class, 1, Side.CLIENT);
+		GameRegistry.registerWorldGenerator(eventmanager, 0);
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 	}
 
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		oreCopper.setHarvestLevel("pickaxe", 1);
-		oreTin.setHarvestLevel("pickaxe", 1);
-		oreSilver.setHarvestLevel("pickaxe", 2);
-		oreLead.setHarvestLevel("pickaxe", 2);
-		oreIronite.setHarvestLevel("pickaxe", 1);
-		oreGoldanite.setHarvestLevel("pickaxe", 2);
-		oreLapanite.setHarvestLevel("pickaxe", 2);
-		oreRedanite.setHarvestLevel("pickaxe", 2);
-		
-		///| Recipes |\\\\
-		
-		/// Crafting \\\
-		GameRegistry.addShapelessRecipe(new ItemStack(IGMod.ingotBronze, 3), new Object[]
-		{
-			IGMod.ingotCopper, IGMod.ingotCopper, IGMod.ingotTin
-		});
-		
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.mossy_cobblestone, 2), new Object[]
-		{
-			Items.clay_ball, Items.wheat, Blocks.cobblestone
-		});
-		
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.stonebrick, 2, 1), new Object[]
-		{
-			Items.clay_ball, Items.wheat, Blocks.stonebrick
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 1, 4), new Object[]
-		{
-			IGMod.Lapanite
-		});
-		
-		GameRegistry.addRecipe(new ItemStack(IGMod.leadFurnace), new Object[]
-		{
-			"LIL", "LFL", "LIL", 'L', IGMod.ingotLead, 'I', Items.iron_ingot, 'F', Blocks.furnace
-		});
-		
-		
-		/// Smelting \\\
-		GameRegistry.addSmelting(IGMod.oreCopper, new ItemStack(IGMod.ingotCopper), 0.15F);
-		GameRegistry.addSmelting(IGMod.oreTin, new ItemStack(IGMod.ingotTin), 0.15F);
-		GameRegistry.addSmelting(IGMod.oreSilver, new ItemStack(IGMod.ingotSilver), 0.15F);
-		GameRegistry.addSmelting(IGMod.oreLead, new ItemStack(IGMod.ingotLead), 0.15F);
-		GameRegistry.addSmelting(IGMod.oreColanite, new ItemStack(IGMod.Colanite), 0.15F);
-		
-		/// OreDictionary \\\
-		OreDictionary.registerOre("oreCopper", IGMod.oreCopper);
-		OreDictionary.registerOre("oreTin", IGMod.oreTin);
-		OreDictionary.registerOre("oreSilver", IGMod.oreSilver);
-		OreDictionary.registerOre("oreLead", IGMod.oreLead);
-		OreDictionary.registerOre("oreIron", IGMod.oreIronite);
-		OreDictionary.registerOre("oreGold", IGMod.oreGoldanite);
-		OreDictionary.registerOre("oreRedstone", IGMod.oreRedanite);
-		OreDictionary.registerOre("oreLapis", IGMod.oreLapanite);
-		
-		OreDictionary.registerOre("ingotCopper", IGMod.ingotCopper);
-		OreDictionary.registerOre("ingotTin", IGMod.ingotTin);
-		OreDictionary.registerOre("ingotSilver", IGMod.ingotSilver);
-		OreDictionary.registerOre("ingotLead", IGMod.ingotLead);
-		OreDictionary.registerOre("ingotBronze", IGMod.ingotBronze);
-		OreDictionary.registerOre("dyeBlue", IGMod.Lapanite);
+		proxy.registerRenderers();
 	}
 	
 	@Mod.EventHandler
-	public void postload(FMLPostInitializationEvent event) {}
+	public void postload(FMLPostInitializationEvent event) {
+		
+		IGTiC.preInit();
+		
+	}
 	
 	@EventHandler
 	public void onServerStarting(FMLServerStartingEvent event)
@@ -229,19 +126,23 @@ public class IGMod
 
 	}
 	
-	private void registerBlock(Block block)
-	{
-		GameRegistry.registerBlock(block, block.getUnlocalizedName());
-	}
-	
-	private void registerBlock(Block block, Class itemClass)
-	{
-		GameRegistry.registerBlock(block, itemClass, block.getUnlocalizedName());
-	}
+
 	
 	private void registerItem(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName());
+	}
+	public static void registerEntity(Class entityClass, String name)
+	{
+	int entityID = EntityRegistry.findGlobalUniqueEntityId();
+	long seed = name.hashCode();
+	Random rand = new Random(seed);
+	int primaryColor = rand.nextInt() * 16777215;
+	int secondaryColor = rand.nextInt() * 16777215;
+
+	EntityRegistry.registerGlobalEntityID(entityClass, name, entityID);
+	EntityRegistry.registerModEntity(entityClass, name, entityID, instance, 64, 1, true);
+	EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, primaryColor, secondaryColor));
 	}
 }
 

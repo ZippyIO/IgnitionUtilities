@@ -1,10 +1,13 @@
 package com.zippy.ig.common;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
+import com.zippy.ig.common.registry.IGItems;
+import com.zippy.ig.common.registry.IGRegistry;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,7 +24,7 @@ public class IGCreativeTab extends CreativeTabs
 	
 	public static void setupIcons()
 	{
-		IGMod.tabCreative.theIcon = new ItemStack(IGMod.oreCopper);
+		IGRegistry.tabCreative.theIcon = new ItemStack(IGItems.Lapanite);
 	}
 	
 	@Override
