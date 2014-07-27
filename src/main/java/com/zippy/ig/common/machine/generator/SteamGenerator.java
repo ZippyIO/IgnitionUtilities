@@ -3,9 +3,12 @@ package com.zippy.ig.common.machine.generator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import IgnitionCore.misc.IUpdatedEntity;
 
@@ -65,6 +68,31 @@ public class SteamGenerator extends BlockConductor {
 			return meta == 0 && side == 6 ? blockIconFaceActive : (side + 6 == meta ? blockIconFaceActive : blockIcon);
 		} else 
 			return meta == 0 && side == 3 ? blockIconFace : (side == meta ? blockIconFace : blockIcon);
+	}
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
+		{
+			int l = MathHelper.floor_double((double)((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+
+			switch (l)
+			{
+			case 0:
+			world.setBlockMetadataWithNotify(i, j, k, 2, l);
+			break;
+
+			case 1:
+			world.setBlockMetadataWithNotify(i, j, k, 5, l);
+			break;
+
+			case 2:
+			world.setBlockMetadataWithNotify(i, j, k, 3, l);
+			break;
+
+			case 3:
+			world.setBlockMetadataWithNotify(i, j, k, 4, l);
+			break;
+			}
+		}
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer p, int a, float b, float c, float d){
